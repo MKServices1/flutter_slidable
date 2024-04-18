@@ -1,4 +1,5 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_slidable/src/auto_close_behavior.dart';
 import 'package:flutter_slidable/src/notifications_old.dart';
@@ -249,7 +250,10 @@ class _SlidableState extends State<Slidable>
       child: SlidableAutoCloseBehaviorInteractor(
         groupTag: widget.groupTag,
         controller: controller,
-        child: widget.child,
+        child: Container(
+          color: controller.enableEndActionPane?const Color(0xFFF1F6FA):Colors.transparent,
+            child: widget.child
+        ),
       ),
     );
 
