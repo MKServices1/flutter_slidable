@@ -20,7 +20,7 @@ class Slidable extends StatefulWidget {
   /// [useTextDirection] and [child] arguments must not be null.
   const Slidable({
     Key? key,
-    this.controller,
+    this.controller,this.slideBackgroundColor,
     this.groupTag,
     this.enabled = true,
     this.closeOnScroll = true,
@@ -55,6 +55,7 @@ class Slidable extends StatefulWidget {
   /// of the same group, open.
   /// {@endtemplate}
   final Object? groupTag;
+
 
   /// A widget which is shown when the user drags the [Slidable] to the right or
   /// to the bottom.
@@ -106,6 +107,8 @@ class Slidable extends StatefulWidget {
   /// {@macro flutter.widgets.ProxyWidget.child}
   final Widget child;
 
+  /// The Color when slider is open
+  final Color? slideBackgroundColor;
   @override
   _SlidableState createState() => _SlidableState();
 
@@ -251,7 +254,8 @@ class _SlidableState extends State<Slidable>
         groupTag: widget.groupTag,
         controller: controller,
         child: Container(
-          color: controller.enableEndActionPane?const Color(0xFFF1F6FA):Colors.transparent,
+          width: double.infinity,
+          color: controller.actionPaneType.value==ActionPaneType.end?widget.slideBackgroundColor??Colors.transparent:Colors.transparent,
             child: widget.child
         ),
       ),
@@ -273,6 +277,7 @@ class _SlidableState extends State<Slidable>
       ],
     );
 
+    print('===');
     return SlidableGestureDetector(
       enabled: widget.enabled,
       controller: controller,
